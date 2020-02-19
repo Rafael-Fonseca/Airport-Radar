@@ -55,43 +55,79 @@ class MyGraphics:
         delta_x = final_x - initial_x
         delta_y = final_y - initial_y
 
-        if delta_x < 0 and delta_y > 0:
+        #if delta_x < 0 and delta_y > 0:
+        if delta_x < 0:
             initial_x, final_x = final_x, initial_x
             initial_y, final_y = final_y, initial_y
 
             delta_x = final_x - initial_x
             delta_y = final_y - initial_y
 
-        y_increment = 1
-
-        if delta_y < 0:
-            y_increment = -1
-            delta_y = -delta_y
-
         incremental_error = 2 * delta_y - delta_x
-        y = initial_y
 
-        if delta_x < 0:
-            for x in range(initial_x, final_x-1, -1):
-                self.point(x, y, color, thickness)
-                print(x,y)
-                # print('to no for')
-                if incremental_error > 0:
-                    y = y + y_increment
-                    incremental_error = incremental_error - 2 * delta_x
 
-                incremental_error = incremental_error + 2 * delta_y
+        if abs(delta_x) >= abs(delta_y):
+            y = initial_y
+            y_increment = 1
 
-        if delta_x > 0:
-            for x in range(initial_x, final_x + 1):
-                self.point(x, y, color, thickness)
-                print(x,y)
-                # print('to no for')
-                if incremental_error > 0:
-                    y = y + y_increment
-                    incremental_error = incremental_error - 2 * delta_x
+            if delta_y < 0:
+                y_increment = -1
+                delta_y = -delta_y
+            elif delta_y == 0:
+                y_increment = 0
 
-                incremental_error = incremental_error + 2 * delta_y
+            if delta_x < 0:
+                for x in range(initial_x, final_x-1, -1):
+                    self.point(x, y, color, thickness)
+                    print('for 1', x, y)
+                    # print('to no for')
+                    if incremental_error > 0:
+                        y = y + y_increment
+                        incremental_error = incremental_error - 2 * delta_x
+
+                    incremental_error = incremental_error + 2 * delta_y
+
+            if delta_x > 0:
+                for x in range(initial_x, final_x + 1):
+                    self.point(x, y, color, thickness)
+                    print('for 2', x, y)
+                    # print('to no for')
+                    if incremental_error > 0:
+                        y = y + y_increment
+                        incremental_error = incremental_error - 2 * delta_x
+
+                    incremental_error = incremental_error + 2 * delta_y
+
+        else:
+            x = initial_x
+            x_increment = 1
+
+            if delta_x < 0:
+                x_increment = -1
+                delta_x = -delta_x
+            elif delta_x == 0:
+                x_increment = 0
+
+            if delta_y < 0:
+                for y in range(initial_y, final_y-1, -1):
+                    self.point(x, y, color, thickness)
+                    print('for 3', x, y)
+                    if incremental_error > 0:
+                        x = x + x_increment
+                        incremental_error = incremental_error - 2 * delta_x
+
+                    incremental_error = incremental_error + 2 * delta_y
+
+            if delta_y > 0:
+                for y in range(initial_y, final_y+1):
+                    self.point(x, y, color, thickness)
+                    print('for 4', x, y)
+                    if incremental_error > 0:
+                        x = x + x_increment
+                        incremental_error = incremental_error - 2 * delta_x
+
+                    incremental_error = incremental_error + 2 * delta_y
+
 
         #TODO: A impressão por tipo de linha não foi implementada
         #TODO: Ainda se faz necessário imprimir linhas onde deltaY > deltaX o que inclui linhas verticais
@@ -115,5 +151,11 @@ class MyGraphics:
 
 a = MyGraphics()
 #a.point(100, 100, 'white', 1)
-a.line(4, 3, 1, 4, 'white', 1,'null')
+#a.line(200, 200, 100, 110, 'white', 1, 'null')  # dX < 0 dY < 0
+#a.line(200, 200, 300, 110, 'white', 1, 'null')  # dX > 0 dY < 0 errou por pouco
+#a.line(200, 200, 100, 300, 'white', 1, 'null')  # dX < 0 dY > 0 errou por pouco
+#a.line(200, 200, 250, 310, 'white', 1, 'null')  # dX > 0 dY > 0 ERROU POR MUITO!!!
+a.line(200, 200, 200, 300, 'blue', 1, 'null')  # dX = 0 dY <ou> 0
+a.line(200, 200, 100, 200, 'white', 1, 'null')  # dX <ou> 0 dY = 0
+
 a.wait()
