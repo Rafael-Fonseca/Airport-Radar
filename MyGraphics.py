@@ -150,12 +150,12 @@ class MyGraphics:
 
 
 a = MyGraphics()
-#a.point(100, 100, 'white', 1)
+a.point(100, 100, 'white', 20)
 #a.line(200, 200, 100, 110, 'white', 1, 'null')  # dX < 0 dY < 0
 #a.line(200, 200, 300, 110, 'white', 1, 'null')  # dX > 0 dY < 0 errou por pouco
 #a.line(200, 200, 100, 300, 'white', 1, 'null')  # dX < 0 dY > 0 errou por pouco
 #a.line(200, 200, 250, 310, 'white', 1, 'null')  # dX > 0 dY > 0 ERROU POR MUITO!!!
-a.line(200, 200, 200, 300, 'blue', 1, 'null')  # dX = 0 dY <ou> 0
-a.line(200, 200, 100, 200, 'white', 1, 'null')  # dX <ou> 0 dY = 0
+#a.line(200, 200, 200, 300, 'blue', 1, 'null')  # dX = 0 dY <ou> 0
+#a.line(200, 200, 100, 200, 'white', 1, 'null')  # dX <ou> 0 dY = 0
 
 a.wait()
