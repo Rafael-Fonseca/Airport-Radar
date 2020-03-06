@@ -1,11 +1,11 @@
 from graphics import *
+import math
 
 class Draw:
     def __init__(self, display):
         #Janela para abrir o Graphics,
         self.display = display
         
-
     def pixel(self, x, y, color, size):
         if size == 1:
             self.display.plotPixel(x, y, color)
@@ -42,8 +42,6 @@ class Draw:
 
         #TODO: reduzir a quantidade de ifs
         
-
-    
     def line(self, initial_x, initial_y, final_x, final_y, color, thickness, type_line):
         delta_x = final_x - initial_x
         delta_y = final_y - initial_y
@@ -56,7 +54,6 @@ class Draw:
             delta_y = final_y - initial_y
 
         incremental_error = 2 * delta_y - delta_x
-
 
         if abs(delta_x) >= abs(delta_y):
             y = initial_y
@@ -114,10 +111,9 @@ class Draw:
 
                     incremental_error = incremental_error + 2 * delta_y
     
-    def circle(self):
-        pass
+    def circle(self, x_center, y_center, radius, color):
+        #formula de circuferencia c = 2 + pi * raio
+        value_pi = math.pi
 
     def text(self):
         pass
-
-
