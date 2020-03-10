@@ -1,5 +1,4 @@
 from graphics import *
-import math
 
 class Draw:
     def __init__(self, display):
@@ -111,9 +110,34 @@ class Draw:
 
                     incremental_error = incremental_error + 2 * delta_y
     
-    def circle(self, x_center, y_center, radius, color):
-        #formula de circuferencia c = 2 + pi * raio
-        value_pi = math.pi
+    def circle_points(self, xc, yc, x, y, color):
+        self.pixel(xc + x, yc + y, color, 1)
+        self.pixel(xc - x, yc + y, color, 1)
+        self.pixel(xc + x, yc - y, color, 1)
+        self.pixel(xc - x, yc - y, color, 1)
+        self.pixel(xc + y, yc + x, color, 1)
+        self.pixel(xc - y, yc + x, color, 1)
+        self.pixel(xc + y, yc - x, color, 1)
+        self.pixel(xc - y, yc - x, color, 1)
+    
+    
+    def circle(self, xc, yc, r, color):
+        x = 0
+        y = r
+        d = 3 - 2 * r
+        self.circle_points(xc, yc, x, y, color)
+
+        while (y >= x):
+            x += 1
+            
+            if (d > 0):
+                y -= 1
+                d = d + 4 * (x - y) + 10
+
+            else:
+                d = d + 4 * x + 6
+
+            self.circle_points(xc, yc, x, y, color)
 
     def text(self):
         pass

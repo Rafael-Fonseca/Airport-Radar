@@ -15,7 +15,7 @@ class Main:
         self.draw.line(100, 100, 100, 200, 'green', 1, 'null')
         self.draw.line(100, 100, 200, 100, 'green', 1, 'null')
 
-        self.draw.circle()
+        self.draw.circle(30, 30, 10, "green")
         
         self.display.getMouse()
         self.display.close()
