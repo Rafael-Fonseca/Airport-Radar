@@ -56,7 +56,7 @@ class MyGraphics:
             point_dict[4](x, y, color)
 
     # A função que deve ser usada para desenhar retas é a função line
-    def line_low(self, initial_x, initial_y, final_x, final_y, color, size):
+    def line_low(self, initial_x, initial_y, final_x, final_y, color, size, type):
         delta_x = final_x - initial_x
         delta_y = final_y - initial_y
         yi = 1
@@ -68,16 +68,45 @@ class MyGraphics:
         incremental_error = 2 * delta_y - delta_x
         y = initial_y
 
-        for x in range(initial_x, final_x + 1):
-            self.point(x, y, color, size)
-            if incremental_error > 0:
-                y = y + yi
-                incremental_error = incremental_error - 2 * delta_x
+        if type == 1:  # Type is normal
+            for x in range(initial_x, final_x + 1):
+                self.point(x, y, color, size)
+                if incremental_error > 0:
+                    y = y + yi
+                    incremental_error = incremental_error - 2 * delta_x
 
-            incremental_error = incremental_error + 2 * delta_y
+                incremental_error = incremental_error + 2 * delta_y
+
+        elif type == 2:  # Type is pontilhada
+            counter = 0
+            for x in range(initial_x, final_x + 1):
+                if counter != 2:
+                    self.point(x, y, color, size)
+                if counter == 2:
+                    counter = 0
+
+                if incremental_error > 0:
+                    y = y + yi
+                    incremental_error = incremental_error - 2 * delta_x
+
+                incremental_error = incremental_error + 2 * delta_y
+                counter += 1
+
+        elif type == 3:  # Type is tracejada
+            counter = 6
+            for x in range(initial_x, final_x + 1):
+                if counter % 6 in [0, 1, 2]:
+                    self.point(x, y, color, size)
+
+                if incremental_error > 0:
+                    y = y + yi
+                    incremental_error = incremental_error - 2 * delta_x
+
+                incremental_error = incremental_error + 2 * delta_y
+                counter += 1
 
     # A função que deve ser usada para desenhar retas é a função line
-    def line_high(self, initial_x, initial_y, final_x, final_y, color, size):
+    def line_high(self, initial_x, initial_y, final_x, final_y, color, size, type):
         delta_x = final_x - initial_x
         delta_y = final_y - initial_y
         xi = 1
@@ -89,26 +118,59 @@ class MyGraphics:
         incremental_error = 2 * delta_x - delta_y
         x = initial_x
 
-        for y in range(initial_y, final_y + 1):
-            self.point(x, y, color, size)
-            if incremental_error > 0:
-                x = x + xi
-                incremental_error = incremental_error - 2 * delta_y
+        if type == 1:  # Type is normal
+            for y in range(initial_y, final_y + 1):
+                self.point(x, y, color, size)
+                if incremental_error > 0:
+                    x = x + xi
+                    incremental_error = incremental_error - 2 * delta_y
 
-            incremental_error = incremental_error + 2 * delta_x
+                incremental_error = incremental_error + 2 * delta_x
 
-    def line(self, initial_x, initial_y, final_x, final_y, color, size):
+        elif type == 2:  # Type is pontilhada
+            counter = 0
+            for y in range(initial_y, final_y + 1):
+                if counter != 2:
+                    self.point(x, y, color, size)
+                elif counter == 2:
+                    counter = 0
+
+                if incremental_error > 0:
+                    x = x + xi
+                    incremental_error = incremental_error - 2 * delta_y
+
+                incremental_error = incremental_error + 2 * delta_x
+                counter += 1
+
+        elif type == 3:    # Type is tracejada
+            counter = 6
+            for y in range(initial_y, final_y + 1):
+                if counter % 6 in [0, 1, 2]:
+                    self.point(x, y, color, size)
+
+                if incremental_error > 0:
+                    x = x + xi
+                    incremental_error = incremental_error - 2 * delta_y
+
+                incremental_error = incremental_error + 2 * delta_x
+                counter += 1
+
+    def line(self, initial_x, initial_y, final_x, final_y, color, size, type):
+        if type not in [1, 2, 3]:
+            print('Tipo de linha inválido')
+            return 'Type line invalid'
+
         if abs(final_y - initial_y) < abs(final_x - initial_x):
             if initial_x > final_x:
-                self.line_low(final_x, final_y, initial_x, initial_y, color, size)
+                self.line_low(final_x, final_y, initial_x, initial_y, color, size, type)
             else:
-                self.line_low(initial_x, initial_y, final_x, final_y, color, size)
+                self.line_low(initial_x, initial_y, final_x, final_y, color, size, type)
 
         else:
             if initial_y > final_y:
-                self.line_high(final_x, final_y, initial_x, initial_y, color, size)
+                self.line_high(final_x, final_y, initial_x, initial_y, color, size, type)
             else:
-                self.line_high(initial_x, initial_y, final_x, final_y, color, size)
+                self.line_high(initial_x, initial_y, final_x, final_y, color, size, type)
 
     def circle_points(self, center_x, center_y, x, y, color):
         self.point(center_x + x, center_y + y, color, 1)
@@ -154,7 +216,7 @@ class MyGraphics:
 
 a = MyGraphics()
 #a.point(100, 100, 'white', 20)  #                              ok
-#a.line(200, 200, 100, 100, 'white', 1)  # dX < 0 dY < 0        ok
+#a.line(200, 200, 100, 100, 'white', 1, 3)  # dX < 0 dY < 0        ok
 #a.line(200, 200, 300, 100, 'green', 1)  # dX > 0 dY < 0        ok
 #a.line(200, 200, 100, 300, 'red', 1)  # dX < 0 dY > 0          ok
 #a.line(200, 200, 300, 300, 'orange', 1)  # dX > 0 dY > 0       ok
