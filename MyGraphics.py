@@ -1,10 +1,12 @@
-from graphics import GraphWin
+from graphics import GraphWin, Text, Point
 
 class MyGraphics:
 
     def __init__(self):
         self.win = GraphWin('Radar de aeroporto', 500, 500)
         self.win.setBackground('black')
+        self.label = Text(Point(100, 100), '')
+        self.label.setTextColor('white')
 
     # A função que deve ser usada para desenhar pontos é a função point
     def pixel_point(self, x, y, color):
@@ -203,8 +205,10 @@ class MyGraphics:
     def airplane(self, x, y, color, ident, direction):
         pass
 
-    def my_text(self, x, y, text):
-        pass
+    def my_text(self, x, y, text, collor):
+        self.label = Text(Point(x, y), text)
+        self.label.setTextColor(collor)
+        self.label.draw(self.win)
 
     def fill(self, x, y, color):
         pass
@@ -222,5 +226,6 @@ a = MyGraphics()
 #a.line(200, 200, 300, 300, 'orange', 1)  # dX > 0 dY > 0       ok
 #a.line(200, 100, 200, 300, 'blue', 1)  # dX = 0 dY <ou> 0      ok
 #a.line(100, 200, 300, 200, 'yellow', 1)  # dX <ou> 0 dY = 0    ok
+#a.my_text(100, 100, 'Texto Teste', 'red')  #  ok
 
 a.wait()
