@@ -1,16 +1,45 @@
 from graphics import GraphWin, Text, Point
 
+class Pixel:
+    def __init__(self, x, y, color):
+        self.x = x
+        self.y = y
+        self.color = color
+
+    def __str__(self):
+        return 'Position: {}, {}\tColor: {}'.format(self.x, self.y, self.color)
+
+
+class Screen:
+
+    def __init__(self, screen):
+        self.pixels = self.create_screen(int(screen.cget('width')), int(screen.cget('height')), screen.cget('bg'))
+
+    def create_screen(self, width, height, color):
+        screen = []
+        for x in range(0, width + 1):
+            line = []
+            for y in range(0, height + 1):
+                line.append(Pixel(x, y, color))
+            screen.append(line)
+
+        return screen
+
 class MyGraphics:
 
     def __init__(self):
         self.win = GraphWin('Radar de aeroporto', 500, 500)
         self.win.setBackground('black')
+
+        self.screen = Screen(self.win)
+
         self.label = Text(Point(100, 100), '')
         self.label.setTextColor('white')
 
     # A função que deve ser usada para desenhar pontos é a função point
     def pixel_point(self, x, y, color):
         self.win.plot(x, y, color)
+        #
 
     # A função que deve ser usada para desenhar pontos é a função point
     def square_point(self, x, y, color):
@@ -205,12 +234,20 @@ class MyGraphics:
     def airplane(self, x, y, color, ident, direction):
         pass
 
-    def my_text(self, x, y, text, collor):
+    def my_text(self, x, y, text, color):
         self.label = Text(Point(x, y), text)
-        self.label.setTextColor(collor)
+        self.label.setTextColor(color)
         self.label.draw(self.win)
 
     def fill(self, x, y, color):
+        '''
+        if cor(x, y) = cor_de_fundo
+            ponto(x, y, cor);
+            pintar(x + 1, y, cor)
+            pintar(x - 1, y, cor)
+            pintar(x, y + 1, cor)
+            pintar(x, y - 1, cor)
+        '''
         pass
 
     def wait(self):
@@ -220,12 +257,20 @@ class MyGraphics:
 
 a = MyGraphics()
 #a.point(100, 100, 'white', 20)  #                              ok
-#a.line(200, 200, 100, 100, 'white', 1, 3)  # dX < 0 dY < 0        ok
-#a.line(200, 200, 300, 100, 'green', 1)  # dX > 0 dY < 0        ok
+#a.line(200, 200, 100, 100, 'white', 1, 1)  # dX < 0 dY < 0        ok
+#a.line(200, 200, 300, 100, 'green', 1, 1)  # dX > 0 dY < 0        ok
 #a.line(200, 200, 100, 300, 'red', 1)  # dX < 0 dY > 0          ok
 #a.line(200, 200, 300, 300, 'orange', 1)  # dX > 0 dY > 0       ok
 #a.line(200, 100, 200, 300, 'blue', 1)  # dX = 0 dY <ou> 0      ok
 #a.line(100, 200, 300, 200, 'yellow', 1)  # dX <ou> 0 dY = 0    ok
 #a.my_text(100, 100, 'Texto Teste', 'red')  #  ok
+
+#print(type(a.win.config))
+#print(a.win.keys())
+#print(a.win.cget('height'))
+
+for line_of_pixels in a.screen.pixels:
+    for pixel in line_of_pixels:
+        print(pixel)
 
 a.wait()
