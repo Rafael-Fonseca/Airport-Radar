@@ -1,4 +1,5 @@
 from graphics import GraphWin, Text, Point
+import stack2
 
 class Pixel:
     def __init__(self, x, y, color):
@@ -39,7 +40,7 @@ class MyGraphics:
     # A função que deve ser usada para desenhar pontos é a função point
     def pixel_point(self, x, y, color):
         self.win.plot(x, y, color)
-        #
+        self.screen.pixels[x][y].color = color # Essa linha aqui
 
     # A função que deve ser usada para desenhar pontos é a função point
     def square_point(self, x, y, color):
@@ -47,6 +48,11 @@ class MyGraphics:
         self.win.plot(x + 1, y, color)
         self.win.plot(x, y + 1, color)
         self.win.plot(x + 1, y + 1, color)
+
+        self.screen.pixels[x][y].color = color
+        self.screen.pixels[x+1][y].color = color
+        self.screen.pixels[x][y+1].color = color
+        self.screen.pixels[x+1][y+1].color = color
 
     # A função que deve ser usada para desenhar pontos é a função point
     def cross_point(self, x, y, color):
@@ -56,23 +62,45 @@ class MyGraphics:
         self.win.plot(x, y + 1, color)
         self.win.plot(x, y - 1, color)
 
+        self.screen.pixels[x][y].color = color
+        self.screen.pixels[x+1][y].color = color
+        self.screen.pixels[x-1][y].color = color
+        self.screen.pixels[x][y+1].color = color
+        self.screen.pixels[x][y-1].color = color
+
     # A função que deve ser usada para desenhar pontos é a função point
     def maximum_point(self, x, y, color):
         self.win.plot(x, y, color)
         self.win.plot(x + 1, y, color)
+
+        self.screen.pixels[x][y].color = color
+        self.screen.pixels[x+1][y].color = color
 
         self.win.plot(x - 1, y + 1, color)
         self.win.plot(x, y + 1, color)
         self.win.plot(x + 1, y + 1, color)
         self.win.plot(x + 2, y + 1, color)
 
+        self.screen.pixels[x-1][y+1].color = color
+        self.screen.pixels[x][y+1].color = color
+        self.screen.pixels[x+1][y+1].color = color
+        self.screen.pixels[x+2][y+1].color = color
+
         self.win.plot(x - 1, y + 2, color)
         self.win.plot(x, y + 2, color)
         self.win.plot(x + 1, y + 2, color)
         self.win.plot(x + 2, y + 2, color)
 
-        self.win.plot(x, y + 4, color)
-        self.win.plot(x + 1, y + 4, color)
+        self.screen.pixels[x-1][y+2].color = color
+        self.screen.pixels[x][y+2].color = color
+        self.screen.pixels[x+1][y+2].color = color
+        self.screen.pixels[x+2][y+2].color = color
+
+        self.win.plot(x, y + 3, color)
+        self.win.plot(x + 1, y + 3, color)
+
+        self.screen.pixels[x][y+3].color = color
+        self.screen.pixels[x+1][y+3].color = color
 
     def point(self, x, y, color, size):
         point_dict = {1: self.pixel_point,
@@ -239,16 +267,53 @@ class MyGraphics:
         self.label.setTextColor(color)
         self.label.draw(self.win)
 
-    def fill(self, x, y, color):
+    def __fill_recursivo(self, x, y, color, bg_color='black'):
         '''
-        if cor(x, y) = cor_de_fundo
-            ponto(x, y, cor);
-            pintar(x + 1, y, cor)
-            pintar(x - 1, y, cor)
-            pintar(x, y + 1, cor)
-            pintar(x, y - 1, cor)
+        NÃO USAR!!!! ESTA CRASHANDO POR MAXIMO DE RECURSAO!!!!!
+
+        :param x: Posição no eixo X de um ponto dentro da área a ser preenchida
+        :param y: Posição no eixo Y de um ponto dentro da área a ser preenchida
+        :param color: A cor com a qual você deseja preencher
+        :param bg_color: A cor do background
+        :return: Preenche a área com a cor selecionada, em caso de colocar um ponto fora da área, index error.
         '''
-        pass
+        if self.screen.pixels[x][y].color == bg_color:
+            self.point(x, y, color, 1)
+            self.fill(x + 1, y, color)
+            self.fill(x - 1, y, color)
+            self.fill(x, y + 1, color)
+            self.fill(x, y - 1, color)
+
+    def fill(self, x, y, color, bg_color='black'):
+        area = stack2.Stack()
+        area.push(self.screen.pixels[x][y])
+
+        while not area.isEmpty():
+            pixel = area.pop()
+            # print('\nEntrei no while:', pixel.x, pixel.y, '\t', pixel.color)
+
+            if pixel.color == bg_color:
+                self.point(pixel.x, pixel.y, color, 1)
+                # print('\tentrei no IF:\n\t\tTroquei a cor deste pixel para:', pixel.color, '\n')
+
+            # if self.screen.pixels[pixel.x + 1][pixel.y].color != color:
+                area.push(self.screen.pixels[pixel.x + 1][pixel.y])
+                # print('\t\tDei push no pixel', area.peek().x, area.peek().y, area.peek().color)
+
+            # if self.screen.pixels[pixel.x - 1][pixel.y].color != color:
+                area.push(self.screen.pixels[pixel.x - 1][pixel.y])
+                # print('\t\tDei push no pixel', area.peek().x, area.peek().y, area.peek().color)
+
+            # if self.screen.pixels[pixel.x][pixel.y + 1].color != color:
+                area.push(self.screen.pixels[pixel.x][pixel.y + 1])
+                # print('\t\tDei push no pixel', area.peek().x, area.peek().y, area.peek().color)
+
+            # if self.screen.pixels[pixel.x][pixel.y - 1].color != color:
+                area.push(self.screen.pixels[pixel.x][pixel.y - 1])
+                # print('\t\tDei push no pixel', area.peek().x, area.peek().y, area.peek().color)
+
+            # else:
+                # print('\t\tDesta vez entrei no ELSE: ',pixel.x, pixel.y, pixel.color)
 
     def wait(self):
         self.win.getMouse()
@@ -257,7 +322,13 @@ class MyGraphics:
 
 a = MyGraphics()
 #a.point(100, 100, 'white', 20)  #                              ok
-#a.line(200, 200, 100, 100, 'white', 1, 1)  # dX < 0 dY < 0        ok
+a.line(200, 200, 100, 200, 'white', 1, 1)  # dX < 0 dY < 0        ok
+a.line(200, 200, 200, 100, 'white', 1, 1)
+a.line(100, 200, 100, 100, 'white', 1, 1)
+a.line(200, 100, 100, 100, 'white', 1, 1)
+
+a.fill_2(199, 150, 'white')
+
 #a.line(200, 200, 300, 100, 'green', 1, 1)  # dX > 0 dY < 0        ok
 #a.line(200, 200, 100, 300, 'red', 1)  # dX < 0 dY > 0          ok
 #a.line(200, 200, 300, 300, 'orange', 1)  # dX > 0 dY > 0       ok
@@ -268,9 +339,15 @@ a = MyGraphics()
 #print(type(a.win.config))
 #print(a.win.keys())
 #print(a.win.cget('height'))
-
+'''
 for line_of_pixels in a.screen.pixels:
     for pixel in line_of_pixels:
         print(pixel)
+'''
+'''
+for x in range (100, 206):
+    print(a.screen.pixels[x][200])
+'''
+
 
 a.wait()
