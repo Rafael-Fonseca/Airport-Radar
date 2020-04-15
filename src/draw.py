@@ -1,5 +1,3 @@
-from graphics import *
-from pixel import Pixel
 from screen import Screen
 
 class Draw:
@@ -61,7 +59,6 @@ class Draw:
             # na intenção de que o usuário perceba que algo está errado.
             point_dict[4](x, y, color)
 
-    
     def line_low(self, initial_x, initial_y, final_x, final_y, color, size, type):
         delta_x = final_x - initial_x
         delta_y = final_y - initial_y
@@ -74,23 +71,20 @@ class Draw:
         incremental_error = 2 * delta_y - delta_x
         y = initial_y
 
-        #Linha continua
-        if type == 1:
+        if type == 1:  # Type is normal
             for x in range(initial_x, final_x + 1):
                 self.point(x, y, color, size)
                 if incremental_error > 0:
-                    y = y + y1
+                    y = y + yi
                     incremental_error = incremental_error - 2 * delta_x
 
-                incremental_error = incremental_error + 2 * delta_x
-        
-        #linha pontilhada
-        elif type == 2:
+                incremental_error = incremental_error + 2 * delta_y
+
+        elif type == 2:  # Type is pontilhada
             counter = 0
             for x in range(initial_x, final_x + 1):
                 if counter != 2:
-                    self.point(x, y , color, size)
-
+                    self.point(x, y, color, size)
                 if counter == 2:
                     counter = 0
 
@@ -98,21 +92,20 @@ class Draw:
                     y = y + yi
                     incremental_error = incremental_error - 2 * delta_x
 
-                incremental_error = incremental_error - 2 * delta_y
+                incremental_error = incremental_error + 2 * delta_y
                 counter += 1
-       
-        #linha tracejada
-        elif type == 3:
+
+        elif type == 3:  # Type is tracejada
             counter = 6
-            for y in range(initial_y, final_y + 1):
+            for x in range(initial_x, final_x + 1):
                 if counter % 6 in [0, 1, 2]:
                     self.point(x, y, color, size)
 
                 if incremental_error > 0:
-                    x = x + xi
-                    incremental_error = incremental_error - 2 * delta_y
+                    y = y + yi
+                    incremental_error = incremental_error - 2 * delta_x
 
-                incremental_error = incremental_error + 2 * delta_x
+                incremental_error = incremental_error + 2 * delta_y
                 counter += 1
 
     def line_high(self, initial_x, initial_y, final_x, final_y, color, size, type):
@@ -127,8 +120,7 @@ class Draw:
         incremental_error = 2 * delta_x - delta_y
         x = initial_x
 
-        #Linha continua
-        if type == 1: 
+        if type == 1:  # Type is normal
             for y in range(initial_y, final_y + 1):
                 self.point(x, y, color, size)
                 if incremental_error > 0:
@@ -137,8 +129,7 @@ class Draw:
 
                 incremental_error = incremental_error + 2 * delta_x
 
-        #linha pontilhada
-        elif type == 2:  
+        elif type == 2:  # Type is pontilhada
             counter = 0
             for y in range(initial_y, final_y + 1):
                 if counter != 2:
@@ -153,8 +144,7 @@ class Draw:
                 incremental_error = incremental_error + 2 * delta_x
                 counter += 1
 
-        #linha tracejada
-        elif type == 3: 
+        elif type == 3:  # Type is tracejada
             counter = 6
             for y in range(initial_y, final_y + 1):
                 if counter % 6 in [0, 1, 2]:
@@ -168,20 +158,19 @@ class Draw:
                 counter += 1
 
     def line(self, initial_x, initial_y, final_x, final_y, color, size, type):
-        if type not in[1, 2, 3]:
-            return print('Type invalid')
+        if type not in [1, 2, 3]:
+            print('Tipo de linha inválido')
+            return 'Type line invalid'
 
-        if abs(final_x - initial_y) < abs(final_x - initial_x):
+        if abs(final_y - initial_y) < abs(final_x - initial_x):
             if initial_x > final_x:
                 self.line_low(final_x, final_y, initial_x, initial_y, color, size, type)
-
             else:
                 self.line_low(initial_x, initial_y, final_x, final_y, color, size, type)
 
         else:
             if initial_y > final_y:
                 self.line_high(final_x, final_y, initial_x, initial_y, color, size, type)
-            
             else:
                 self.line_high(initial_x, initial_y, final_x, final_y, color, size, type)
     

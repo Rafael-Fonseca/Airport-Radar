@@ -327,9 +327,9 @@ a.line(200, 200, 200, 100, 'white', 1, 1)
 a.line(100, 200, 100, 100, 'white', 1, 1)
 a.line(200, 100, 100, 100, 'white', 1, 1)
 
-a.fill_2(199, 150, 'white')
+#a.fill_2(199, 150, 'white')
 
-#a.line(200, 200, 300, 100, 'green', 1, 1)  # dX > 0 dY < 0        ok
+a.line(0, 250, 500, 250, 'green', 1, 1)  # dX > 0 dY < 0        ok
 #a.line(200, 200, 100, 300, 'red', 1)  # dX < 0 dY > 0          ok
 #a.line(200, 200, 300, 300, 'orange', 1)  # dX > 0 dY > 0       ok
 #a.line(200, 100, 200, 300, 'blue', 1)  # dX = 0 dY <ou> 0      ok

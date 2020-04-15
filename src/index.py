@@ -1,4 +1,3 @@
-from graphics import *
 from radar import Radar
 
 class Main:
