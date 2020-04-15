@@ -7,7 +7,7 @@ class Pixel:
         self.color = color
 
     def __str__(self):
-        return('Position: {}, {}\tColor: {}'.format(self.x, self.y, self.color) )
+        return 'Position: {}, {}\tColor: {}'.format(self.x, self.y, self.color) 
 
 
 

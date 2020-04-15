@@ -7,8 +7,6 @@ class Main:
         self.radar.draw_radar()
 
         
-
-
 teste = Main()
 teste.main()
 
