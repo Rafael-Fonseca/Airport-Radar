@@ -9,8 +9,7 @@ class Radar:
         
         self.draw = Draw(self.display)
         
-
-
+        '''
         self.draw.circle(250, 250, 62, 'green')
         self.draw.circle(250, 250, 124, 'green')
         self.draw.circle(250, 250, 186, 'green')
@@ -31,11 +30,10 @@ class Radar:
         self.draw.line(250, 0, 250, 500, 'green', 1, 3)
 
 
-
-
         self.draw.text(250, 250, "Teste", "red", 10, "bold")
+        '''
 
-
+        self.draw.project_plane(250,250,5, 100, 500, 250,250 )
 
         self.display.getMouse()
         self.display.close()

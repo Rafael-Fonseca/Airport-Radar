@@ -240,9 +240,9 @@ class Draw:
 
                 area.push(self.screen.pixels[pixel.x][pixel.y - 1])
 
+    def project_plane(self, x, y, z,f, F, x1, y1):
+        x1 = int(x * f/(F-z))
+        y1 = int(y * f/(F-z))
 
-    def project_plane(self, x, y, z,f, F, x1, x2):
-        x1 = x * f/(F-z)
-        y1 = y * f/(F-Z)
-
-        return
+        self.point(x1,y1, "green",1)
+ 
