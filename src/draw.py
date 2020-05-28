@@ -1,4 +1,7 @@
 from screen import Screen
+from stack import Stack
+from graphics import *
+
 
 '''
           PROJETO DESENVOLVIDO POR:
@@ -65,6 +68,7 @@ class Draw:
             # Em casos que o usuário escolher um tamanho não disponível, o tamanho é alterado para o maximo,
             # na intenção de que o usuário perceba que algo está errado.
             point_dict[4](x, y, color)
+
 
     def line_low(self, initial_x, initial_y, final_x, final_y, color, size, type):
         delta_x = final_x - initial_x
@@ -210,8 +214,35 @@ class Draw:
 
             self.circle_points(xc, yc, x, y, color)
 
-    def text(self):
-        pass
+    def text(self, x, y, word, cor, size, style):
+        t = Text(Point(x,y), word)
+        t.setOutline(cor)
+        t.setSize(size)
+        t.setStyle(style)
+        t.draw(self.display)
 
-    def fill(self):
-        pass
+
+    def fill(self, x, y, color, bg_color='black'):
+        area = stack.Stack()
+        area.push(self.screen.pixels[x][y])
+
+        while not area.isEmpty():
+            pixel = area.pop()
+
+            if pixel.color == bg_color:
+                self.point(pixel.x, pixel.y, color, 1)
+
+                area.push(self.screen.pixels[pixel.x + 1][pixel.y])
+
+                area.push(self.screen.pixels[pixel.x - 1][pixel.y])
+
+                area.push(self.screen.pixels[pixel.x][pixel.y + 1])
+
+                area.push(self.screen.pixels[pixel.x][pixel.y - 1])
+
+
+    def project_plane(self, x, y, z,f, F, x1, x2):
+        x1 = x * f/(F-z)
+        y1 = y * f/(F-Z)
+
+        return
