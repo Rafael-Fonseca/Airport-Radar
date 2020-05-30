@@ -13,6 +13,12 @@ class Main:
     def main(self):
         self.radar = Radar()
         self.radar.draw_radar()
+        self.radar.reset()
+
+        self.radar.display.getMouse()
+        self.radar.display.close()
+
+
 
         
 teste = Main()

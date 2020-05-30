@@ -2,14 +2,25 @@ from graphics import *
 from draw import Draw
 from plane import Plane
 
+'''
+          PROJETO DESENVOLVIDO POR:
+
+          FELIPE OLIVEIRA MAIA          RA: 21801679
+          RAFAEL ABREU FONSECA          RA: 21700439
+'''
+
 class Radar:
+
+    def __init__(self):
+        self.base = []
+
     def draw_radar(self):
         self.display = GraphWin("Radar", 500,500)
         self.display.setBackground('black')
         
         self.draw = Draw(self.display)
         
-        '''
+
         self.draw.circle(250, 250, 62, 'green')
         self.draw.circle(250, 250, 124, 'green')
         self.draw.circle(250, 250, 186, 'green')
@@ -29,15 +40,17 @@ class Radar:
         # Linha vertical
         self.draw.line(250, 0, 250, 500, 'green', 1, 3)
 
-
-        self.draw.text(250, 250, "Teste", "red", 10, "bold")
-        '''
-
-        self.draw.project_plane(250,250,5, 100, 500, 250,250 )
-
-        self.display.getMouse()
-        self.display.close()
+        self.base = self.draw.screen.pixels
 
 
+    def reset(self):
 
-    
+        for column_pixel in self.base:
+            for pixel in column_pixel:
+                self.draw.point(pixel.x, pixel.y, 'black', 1)
+
+        self.draw_radar()
+
+
+#radar = Radar()
+#radar.draw_radar()

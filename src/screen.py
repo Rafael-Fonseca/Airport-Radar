@@ -1,7 +1,15 @@
 from pixel import Pixel
 
-class Screen:
+'''
+          PROJETO DESENVOLVIDO POR:
+
+          FELIPE OLIVEIRA MAIA          RA: 21801679
+          RAFAEL ABREU FONSECA          RA: 21700439
+'''
+
+class Screen(list):
     def __init__(self, screen):
+        super().__init__()
         self.pixels = self.create_screen(int(screen.cget('width')), int(screen.cget('height')), screen.cget('bg'))
 
     def create_screen(self, width, height,color):

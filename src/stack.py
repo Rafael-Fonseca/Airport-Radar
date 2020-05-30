@@ -1,3 +1,10 @@
+'''
+          PROJETO DESENVOLVIDO POR:
+
+          FELIPE OLIVEIRA MAIA          RA: 21801679
+          RAFAEL ABREU FONSECA          RA: 21700439
+'''
+
 class Stack:
     def __init__(self):
         self.items = []
