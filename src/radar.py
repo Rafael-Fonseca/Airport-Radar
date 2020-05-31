@@ -1,6 +1,7 @@
 from graphics import *
 from draw import Draw
 from plane import Plane
+import copy
 
 '''
           PROJETO DESENVOLVIDO POR:
@@ -40,16 +41,15 @@ class Radar:
         # Linha vertical
         self.draw.line(250, 0, 250, 500, 'green', 1, 3)
 
-        self.base = self.draw.screen.pixels
+        self.base = copy.deepcopy(self.draw.screen.pixels)
 
 
     def reset(self):
 
         for column_pixel in self.base:
             for pixel in column_pixel:
-                self.draw.point(pixel.x, pixel.y, 'black', 1)
-
-        self.draw_radar()
+                if pixel != self.draw.screen.pixels[pixel.x][pixel.y]:
+                    self.draw.point(pixel.x, pixel.y, pixel.color, 1)
 
 
 #radar = Radar()

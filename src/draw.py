@@ -23,36 +23,37 @@ class Draw:
 
     # A função que deve ser usada para desenhar pontos é a função point
     def square_point(self,x, y, color):
-        self.display.plot(x, y, color)
-        self.display.plot(x + 1, y, color)
-        self.display.plot(x, y + 1, color)
-        self.display.plot(x + 1, y + 1, color)
+        self.pixel_point(x,y,color)
+        self.pixel_point(x + 1, y, color)
+        self.pixel_point(x, y + 1, color)
+        self.pixel_point(x + 1, y + 1, color)
+        
 
     # A função que deve ser usada para desenhar pontos é a função point
     def cross_point(self, x, y, color):
-        self.display.plot(x, y , color)
-        self.display.plot(x + 1, y, color)
-        self.display.plot(x - 1, y, color)
-        self.display.plot(x, y + 1, color)
-        self.display.plot(x, y - 1, color)
+        self.pixel_point(x, y , color)
+        self.pixel_point(x + 1, y, color)
+        self.pixel_point(x - 1, y, color)
+        self.pixel_point(x, y + 1, color)
+        self.pixel_point(x, y - 1, color)
 
     # A função que deve ser usada para desenhar pontos é a função point
     def maximum_point(self, x, y , color):
-        self.display.plot(x, y, color)
-        self.display.plot(x + 1, y, color)
+        self.pixel_point(x, y, color)
+        self.pixel_point(x + 1, y, color)
 
-        self.display.plot(x - 1, y + 1, color)
-        self.display.plot(x, y + 1, color)
-        self.display.plot(x + 1, y + 1, color)
-        self.display.plot(x + 2, y + 1, color)
+        self.pixel_point(x - 1, y + 1, color)
+        self.pixel_point(x, y + 1, color)
+        self.pixel_point(x + 1, y + 1, color)
+        self.pixel_point(x + 2, y + 1, color)
 
-        self.display.plot(x - 1, y + 2, color)
-        self.display.plot(x, y + 2, color)
-        self.display.plot(x + 1, y + 2, color)
-        self.display.plot(x + 2, y + 2, color)
+        self.pixel_point(x - 1, y + 2, color)
+        self.pixel_point(x, y + 2, color)
+        self.pixel_point(x + 1, y + 2, color)
+        self.pixel_point(x + 2, y + 2, color)
 
-        self.display.plot(x, y + 4, color)
-        self.display.plot( x + 1, y + 4, color)
+        self.pixel_point(x, y + 4, color)
+        self.pixel_point( x + 1, y + 4, color)
 
     #Função que gera o pontos
     def point(self, x, y, color, size):
@@ -214,12 +215,19 @@ class Draw:
 
             self.circle_points(xc, yc, x, y, color)
 
-    def text(self, x, y, word, cor, size, style):
+    def text(self, x, y, word, color, size, style):
         t = Text(Point(x,y), word)
-        t.setOutline(cor)
+        t.setOutline(color)
         t.setSize(size)
         t.setStyle(style)
         t.draw(self.display)
+
+        delta_x = int(len(word)*size/2)
+        delta_y = int(size/2)
+
+        for _x in range(x - delta_x, x + delta_x + 1):
+            for _y in range(y - delta_y, y + delta_y + 1):
+                self.screen.pixels[_x][_y].color = color
 
 
     def fill(self, x, y, color, bg_color='black'):
