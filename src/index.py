@@ -14,7 +14,8 @@ class Main:
     def main(self):
         self.radar = Radar()
         self.radar.draw_radar()
-
+        
+        '''
         self.radar.draw.text(250, 250, 'Teste', 'red', 12, 'bold')
         
         self.radar.draw.line(238, 244, 262, 244, 'blue', 1, 1)
@@ -29,6 +30,9 @@ class Main:
 
         time.sleep(2)
         self.radar.reset()
+        '''
+        self.radar.draw.airplane(335, 225, 'white')
+        self.radar.draw.fill(335, 225, 'white')
 
         self.radar.display.getMouse()
         self.radar.display.close()

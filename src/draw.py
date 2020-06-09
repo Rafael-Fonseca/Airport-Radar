@@ -231,7 +231,7 @@ class Draw:
 
 
     def fill(self, x, y, color, bg_color='black'):
-        area = stack.Stack()
+        area = Stack()
         area.push(self.screen.pixels[x][y])
 
         while not area.isEmpty():
@@ -248,7 +248,38 @@ class Draw:
 
                 area.push(self.screen.pixels[pixel.x][pixel.y - 1])
 
-    def project_plane(self, x, y, z,f, F, x1, y1):
+    def airplane(self, x, y, color):
+        
+        self.point(x, y-17, color, 1)
+
+        self.line(x-2, y-16, x+2, y-16, color, 1, 1)
+
+        self.point(x-2, y-15, color, 1)
+        self.point(x+2, y-15, color, 1)
+
+        self.line(x-3, y-15, x-3, y-5, color, 1, 1)
+        self.line(x+3, y-15, x+3, y-5, color, 1, 1)
+
+        self.line(x-4, y-4, x-17, y+10, color, 1, 1)
+        self.line(x+4, y-4, x+17, y+10, color, 1, 1)
+
+        self.line(x-16, y+11, x-3, y+6, color, 1, 1)
+        self.line(x+16, y+11, x+3, y+6, color, 1, 1)
+
+        self.line(x-3, y+7, x-3, y+10, color, 1, 1)
+        self.line(x+3, y+7, x+3, y+10, color, 1, 1)
+
+        self.line(x-4, y+10, x-9, y+16, color, 1, 1)
+        self.line(x+4, y+10, x+9, y+16, color, 1, 1)
+
+        self.line(x-9, y+16, x-4, y+16, color, 1, 1)
+        self.line(x+4, y+16, x+9, y+16, color, 1, 1)
+
+        self.line(x-3, y+15, x, y+13, color, 1, 1)
+        self.line(x+3, y+15, x, y+13, color, 1, 1)
+
+
+    def project_airplane(self, x, y, z,f, F, x1, y1):
         x1 = int(x * f/(F-z))
         y1 = int(y * f/(F-z))
 
