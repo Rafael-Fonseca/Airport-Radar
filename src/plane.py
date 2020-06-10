@@ -1,3 +1,11 @@
+'''
+          PROJETO DESENVOLVIDO POR:
+
+          FELIPE OLIVEIRA MAIA          RA: 21801679
+          RAFAEL ABREU FONSECA          RA: 21700439
+'''
+
+
 import math
 from polygon import Polygon
 

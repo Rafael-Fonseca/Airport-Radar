@@ -1,5 +1,12 @@
 from line import Line
 
+'''
+          PROJETO DESENVOLVIDO POR:
+
+          FELIPE OLIVEIRA MAIA          RA: 21801679
+          RAFAEL ABREU FONSECA          RA: 21700439
+'''
+
 
 class Polygon:
 

@@ -1,8 +1,14 @@
+'''
+          PROJETO DESENVOLVIDO POR:
+
+          FELIPE OLIVEIRA MAIA          RA: 21801679
+          RAFAEL ABREU FONSECA          RA: 21700439
+'''
+
 from pixel import Pixel
 
 
 class Line:
-
     def __init__(self, x_initial, y_initial, x_final, y_final):
         self.x_initial = x_initial
         self.y_initial = y_initial

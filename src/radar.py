@@ -1,6 +1,8 @@
 from graphics import *
 from draw import Draw
 from plane import Plane
+from plane_route import Plane_route
+import pandas as pd
 import copy
 
 '''
@@ -18,10 +20,13 @@ class Radar:
     def draw_radar(self):
         self.display = GraphWin("Radar", 500,500)
         self.display.setBackground('black')
+        self.table = pd.read_csv('./planes/radar.csv')
         
         self.draw = Draw(self.display)
-        
 
+        self.teste = Plane_route(self.table)
+        
+        
         self.draw.circle(250, 250, 62, 'green')
         self.draw.circle(250, 250, 124, 'green')
         self.draw.circle(250, 250, 186, 'green')
@@ -42,6 +47,9 @@ class Radar:
         self.draw.line(250, 0, 250, 500, 'green', 1, 3)
 
         self.base = copy.deepcopy(self.draw.screen.pixels)
+        
+
+        self.teste.get_plane()
 
 
     def reset(self):

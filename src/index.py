@@ -31,7 +31,7 @@ class Main:
 
         time.sleep(2)
         self.radar.reset()
-        '''
+        
         self.plane1 = Plane(335, 225)
 
         #self.radar.draw.airplane(335, 225, 'orange')
@@ -43,9 +43,11 @@ class Main:
 
         self.radar.draw.fill(155, 370, 'orange')
         print('dei fill')
+        '''
 
         self.radar.display.getMouse()
         self.radar.display.close()
+        
 
 
 
