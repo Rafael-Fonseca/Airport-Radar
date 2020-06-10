@@ -9,16 +9,18 @@ from line import Line
 
 
 class Polygon:
+    '''
+    Todo: verificação se len tuple_points é maior que 3
+    '''
 
-    def __init__(self, *tuple_points):
-
-        if len(tuple_points) < 3:
-            raise AttributeError('A classe polygon deve ser iniciada com no mínimo 3 pontos.')
-
+    def __init__(self, list_tuple_points):
         self.lines = []
+        for point in range(0, len(list_tuple_points)-1):
+            self.lines.append(Line(list_tuple_points[point][0], list_tuple_points[point][1],
+                                   list_tuple_points[point+1][0], list_tuple_points[point+1][1]))
 
-        for point in range(0, len(tuple_points)-1):
-            self.lines.append(Line(tuple_points[point][0], tuple_points[point][1],
-                                   tuple_points[point+1][0], tuple_points[point+1][1]))
-
-        self.lines.append(Line(tuple_points[-1][0], tuple_points[-1][1], tuple_points[0][0], tuple_points[0][1]))
+        '''
+        A linha abaixo garante que não aja index error e realiza a ultima iteração.
+        '''
+        self.lines.append(Line(list_tuple_points[-1][0], list_tuple_points[-1][1],
+                               list_tuple_points[0][0], list_tuple_points[0][1]))

@@ -220,7 +220,7 @@ class Draw:
 
     #Função que gera o texto
     def text(self, x, y, word, color, size, style):
-        t = Text(Point(x,y), word)
+        t = Text(Point(x, y), word)
         t.setOutline(color)
         t.setSize(size)
         t.setStyle(style)
@@ -264,5 +264,5 @@ class Draw:
         x1 = int(x * f/(F-z))
         y1 = int(y * f/(F-z))
 
-        self.point(x1,y1, "green",1)
+        self.point(x1,y1, "green", 1)
  
