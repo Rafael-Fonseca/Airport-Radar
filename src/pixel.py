@@ -5,6 +5,7 @@
           RAFAEL ABREU FONSECA          RA: 21700439
 '''
 
+
 class Pixel:
     def __init__(self, x, y, color):
         self.x = x

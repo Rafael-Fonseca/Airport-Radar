@@ -1,4 +1,5 @@
 from radar import Radar
+from plane import Plane
 import time
 
 '''
@@ -31,8 +32,17 @@ class Main:
         time.sleep(2)
         self.radar.reset()
         '''
-        self.radar.draw.airplane(335, 225, 'white')
-        self.radar.draw.fill(335, 225, 'white')
+        self.plane1 = Plane(335, 225)
+
+        #self.radar.draw.airplane(335, 225, 'orange')
+
+        #self.radar.draw.line(0, 410, 250, 410,  'orange', 1, 1)
+        #self.radar.draw.line(0, 340, 250, 340, 'orange', 1, 1)
+        #self.radar.draw.line(100,410, 100, 340, 'orange', 1, 1)
+        #self.radar.draw.line(190, 410, 190, 340, 'orange', 1, 1)
+
+        self.radar.draw.fill(155, 370, 'orange')
+        print('dei fill')
 
         self.radar.display.getMouse()
         self.radar.display.close()

@@ -1,6 +1,7 @@
 from screen import Screen
 from stack import Stack
 from graphics import *
+import math
 
 
 '''
@@ -230,14 +231,21 @@ class Draw:
                 self.screen.pixels[_x][_y].color = color
 
 
-    def fill(self, x, y, color, bg_color='black'):
+    def fill(self, x, y, color):
+        '''
+
+        :param x: Coordenada X de um ponto que deve estar dentro da área fechada a ser preenchida.
+        :param y: Coordenada Y de um ponto que deve estar dentro da area fechada a ser preenchida.
+        :param color: Cor que preencherá a área e deve ser a mesma cor que limita a área.
+        :return: Preenche uma área com a mesma cor que a limita.
+        '''
         area = Stack()
         area.push(self.screen.pixels[x][y])
 
         while not area.isEmpty():
             pixel = area.pop()
 
-            if pixel.color == bg_color:
+            if pixel.color != color:
                 self.point(pixel.x, pixel.y, color, 1)
 
                 area.push(self.screen.pixels[pixel.x + 1][pixel.y])
@@ -247,36 +255,6 @@ class Draw:
                 area.push(self.screen.pixels[pixel.x][pixel.y + 1])
 
                 area.push(self.screen.pixels[pixel.x][pixel.y - 1])
-
-    def airplane(self, x, y, color):
-        
-        self.point(x, y-17, color, 1)
-
-        self.line(x-2, y-16, x+2, y-16, color, 1, 1)
-
-        self.point(x-2, y-15, color, 1)
-        self.point(x+2, y-15, color, 1)
-
-        self.line(x-3, y-15, x-3, y-5, color, 1, 1)
-        self.line(x+3, y-15, x+3, y-5, color, 1, 1)
-
-        self.line(x-4, y-4, x-17, y+10, color, 1, 1)
-        self.line(x+4, y-4, x+17, y+10, color, 1, 1)
-
-        self.line(x-16, y+11, x-3, y+6, color, 1, 1)
-        self.line(x+16, y+11, x+3, y+6, color, 1, 1)
-
-        self.line(x-3, y+7, x-3, y+10, color, 1, 1)
-        self.line(x+3, y+7, x+3, y+10, color, 1, 1)
-
-        self.line(x-4, y+10, x-9, y+16, color, 1, 1)
-        self.line(x+4, y+10, x+9, y+16, color, 1, 1)
-
-        self.line(x-9, y+16, x-4, y+16, color, 1, 1)
-        self.line(x+4, y+16, x+9, y+16, color, 1, 1)
-
-        self.line(x-3, y+15, x, y+13, color, 1, 1)
-        self.line(x+3, y+15, x, y+13, color, 1, 1)
 
 
     def project_airplane(self, x, y, z,f, F, x1, y1):
