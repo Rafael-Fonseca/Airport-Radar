@@ -49,9 +49,7 @@ class Radar:
         self.base = copy.deepcopy(self.draw.screen.pixels)
 
     def reset(self):
-        print('Apagando a tela')
         for column_pixel in self.base:
             for pixel in column_pixel:
                 if pixel != self.draw.screen.pixels[pixel.x][pixel.y]:
                     self.draw.point(pixel.x, pixel.y, pixel.color, 1)
-        print('Tela apagada')

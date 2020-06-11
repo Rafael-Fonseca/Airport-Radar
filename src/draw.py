@@ -18,7 +18,7 @@ class Draw:
         self.screen = Screen(self.display)
 
     # A função que deve ser usada para desenhar pontos é a função point    
-    def pixel_point(self,x, y, color):
+    def pixel_point(self, x, y, color):
         self.display.plot(x, y, color)
         try:
             self.screen.pixels[x][y].color = color
@@ -42,7 +42,7 @@ class Draw:
         self.pixel_point(x, y - 1, color)
 
     # A função que deve ser usada para desenhar pontos é a função point
-    def maximum_point(self, x, y , color):
+    def maximum_point(self, x, y, color):
         self.pixel_point(x, y, color)
         self.pixel_point(x + 1, y, color)
 
@@ -73,7 +73,6 @@ class Draw:
             # Em casos que o usuário escolher um tamanho não disponível, o tamanho é alterado para o maximo,
             # na intenção de que o usuário perceba que algo está errado.
             point_dict[4](x, y, color)
-
 
     def line_low(self, initial_x, initial_y, final_x, final_y, color, size, type):
         delta_x = final_x - initial_x
@@ -234,7 +233,7 @@ class Draw:
 
         for _x in range(x - delta_x, x + delta_x + 1):
             for _y in range(y - delta_y, y + delta_y + 1):
-                self.screen.pixels[_x][_y].color = color
+                self.screen.pixels[_x][_y].color = 'text'
 
     #Função de preencher os polignos
     def fill(self, x, y, color):

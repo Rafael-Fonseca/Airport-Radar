@@ -29,8 +29,13 @@ class Main:
 
             for flight in self.id_flight:
                 data_flight = airplane_routes.get((str(time), flight))
-                airplane = Plane(int(data_flight[5]), int(float(data_flight[6])), int(data_flight[7]))
-                airplane.draw_plane(self.radar.display)
+
+                if int(data_flight[5]) != 0:
+                    airplane = Plane(int(data_flight[5]) + 250, int(float(data_flight[6])) + 250, int(data_flight[7]))
+                if int(data_flight[5]) == 0:
+                    airplane = Plane(int(data_flight[5]), int(float(data_flight[6])), int(data_flight[7]))
+
+                airplane.draw_plane(self.radar.draw, data_flight)
 
             self.radar.reset()
 

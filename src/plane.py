@@ -31,18 +31,62 @@ class Plane():
                                        self.points_to_draw[5][0], self.points_to_draw[5][1]),
                                   ]
         if x == 0:
-            self.lines_to_draw = [Line(5, 0, -5, 0),
-                                  Line(2, -4, 2, 4),
-                                  Line(-3, -2, -3, 2)]
+            self.lines_to_draw = [Line(255, 250, 245, 250),
+                                  Line(253, 246, 253, 254),
+                                  Line(247, 248, 247, 252)]
 
-    def draw_plane(self, win, data_list=None):
-        artist = Draw(win)
+    def right(self, x, y, draw):
+        return self.can_draw_text(x+20, y, draw), (x+20, y)
+
+    def up(self, x, y, draw):
+        return self.can_draw_text(x, y-20, draw), (x, y-20)
+
+    def left(self, x, y, draw):
+        return self.can_draw_text(x-30, y, draw), (x-30, y)
+
+    def down(self, x, y, draw):
+        return self.can_draw_text(x, y+20, draw), (x, y+20)
+
+    def draw_plane(self, draw, data_list):
+        '''
         print('printando aviao:\n x1:{}\ty1:{}\nx2:{}\ty2:{}'.format(self.lines_to_draw[0].x_initial,
                                                                      self.lines_to_draw[0].y_initial,
                                                                      self.lines_to_draw[0].x_final,
                                                                      self.lines_to_draw[0].y_final))
+        '''
+
+        color = 'white'
+        if data_list[1] == 'P':
+            color = 'yellow'
+        if data_list[1] == 'D':
+            color = 'red'
+
         for line in self.lines_to_draw:
-            artist.line(line.x_initial, line.y_initial, line.x_final, line.y_final, 'red', 1, 1)
+            draw.line(line.x_initial, line.y_initial, line.x_final, line.y_final, color, 1, 1)
+
+        direction_dict = {
+            'right' : self.right,
+            'up'    : self.up,
+            'left'  : self.left,
+            'down'  : self.down
+        }
+
+        for direction in ['right', 'up', 'left', 'down']:
+            can_text_in_coordinates = direction_dict[direction](self.lines_to_draw[0].x_initial,
+                                                                self.lines_to_draw[0].y_initial, draw)
+            if can_text_in_coordinates[0]:
+                return draw.text(can_text_in_coordinates[1][0],
+                                 can_text_in_coordinates[1][1], data_list[2], color, 6, 'bold')
+
+
+    def can_draw_text(self, x, y, draw):
+        try:
+            if draw.screen.pixels[x][y].color == 'text':
+                return False
+            return True
+        except IndexError:
+            return False
+
 
     def get_points_projection(self, x, y, z, f=3500, F=15000):
         x1 = x * f / (F - z)
@@ -51,7 +95,7 @@ class Plane():
         return x1, y1
 
     def get_plane_points(self, x, y):
-        self.plane_points = [(x,y), (x-10,y), (x-8,y-2), (x-8,y+2), (x-3,y-4), (x-3,y+4)]
+        self.plane_points = [(x, y), (x-10, y), (x-8, y-2), (x-8, y+2), (x-3, y-4), (x-3, y+4)]
 
     def get_direction(self, x, y):
         return math.atan(y / x)

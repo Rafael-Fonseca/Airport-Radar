@@ -3,7 +3,7 @@ import csv
 
 class Utils:
 
-    def read_csv(self, document_path='./planes/planilha de radar.csv'):
+    def read_csv(self, document_path):
         file = []
         with open(document_path, 'r') as csv_file:
             reader = csv.reader(csv_file, delimiter=';')
