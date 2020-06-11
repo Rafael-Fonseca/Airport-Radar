@@ -18,13 +18,13 @@ class Radar:
         self.base = []
 
     def draw_radar(self):
-        self.display = GraphWin("Radar", 800, 800)
+        self.display = GraphWin("Radar", 500, 500)
         self.display.setBackground('black')
-        self.table = pd.read_csv('./planes/radar.csv')
+        #self.table = pd.read_csv('./planes/radar.csv')
         
         self.draw = Draw(self.display)
 
-        self.teste = Plane_route(self.table)
+        #self.teste = Plane_route(self.table)
         
         
         self.draw.circle(250, 250, 62, 'green')
@@ -47,33 +47,11 @@ class Radar:
         self.draw.line(250, 0, 250, 500, 'green', 1, 3)
 
         self.base = copy.deepcopy(self.draw.screen.pixels)
-        
-
-        #self.teste.get_plane()
-
 
     def reset(self):
-
+        print('Apagando a tela')
         for column_pixel in self.base:
             for pixel in column_pixel:
                 if pixel != self.draw.screen.pixels[pixel.x][pixel.y]:
                     self.draw.point(pixel.x, pixel.y, pixel.color, 1)
-
-
-
-
-radar = Radar()
-radar.draw_radar()
-
-plane = Plane(-87, 492, 250)
-
-for line in plane.lines_to_draw.lines:
-    #print(plane.lines_to_draw.lines)
-    #print('x inicial: {}\n y inicial: {}\nx final: {}\n y final: {}\n'.format(line.x_initial, line.y_initial, line.x_final, line.y_final))
-    radar.draw.line(line.x_initial, line.y_initial, line.x_final, line.y_final, 'yellow', 1, 1)
-
-print('Cabei')
-
-radar.display.getMouse()
-radar.display.close()
-
+        print('Tela apagada')

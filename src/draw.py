@@ -20,7 +20,10 @@ class Draw:
     # A função que deve ser usada para desenhar pontos é a função point    
     def pixel_point(self,x, y, color):
         self.display.plot(x, y, color)
-        self.screen.pixels[x][y].color = color
+        try:
+            self.screen.pixels[x][y].color = color
+        except(IndexError):
+            pass
 
     # A função que deve ser usada para desenhar pontos é a função point
     def square_point(self,x, y, color):
