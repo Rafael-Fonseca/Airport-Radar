@@ -10,7 +10,7 @@ import math
           FELIPE OLIVEIRA MAIA          RA: 21801679
           RAFAEL ABREU FONSECA          RA: 21700439
 '''
-
+#Classe da biblioteca grafíca
 class Draw:
     def __init__(self, display):
         #Janela para abrir o Graphics,

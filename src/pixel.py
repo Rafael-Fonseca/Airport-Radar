@@ -5,7 +5,7 @@
           RAFAEL ABREU FONSECA          RA: 21700439
 '''
 
-
+#Classe para pegar as cores do pixel
 class Pixel:
     def __init__(self, x, y, color):
         self.x = x

@@ -6,12 +6,13 @@ from pixel import Pixel
           FELIPE OLIVEIRA MAIA          RA: 21801679
           RAFAEL ABREU FONSECA          RA: 21700439
 '''
-
+#Classe para verificar os pixels dentro da tela.
 class Screen(list):
+    #Separando os valores da classe
     def __init__(self, screen):
         super().__init__()
         self.pixels = self.create_screen(int(screen.cget('width')), int(screen.cget('height')), screen.cget('bg'))
-
+    #Função que reconhece os pixeis da tela e suas cores
     def create_screen(self, width, height,color):
         screen = []
 
