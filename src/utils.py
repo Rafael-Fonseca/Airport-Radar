@@ -22,11 +22,3 @@ class Utils:
         return data_dict
 
 
-'''
-util = Utils()
-
-a = util.transform_data_file(util.read_csv())
-
-for t in range(10, 151, 10):
-    print(a.get((str(t), 'LA 2203')))
-'''
