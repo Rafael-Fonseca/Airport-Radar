@@ -1,3 +1,5 @@
+from pixel import Pixel
+
 '''
           PROJETO DESENVOLVIDO POR:
 
@@ -5,10 +7,10 @@
           RAFAEL ABREU FONSECA          RA: 21700439
 '''
 
-from pixel import Pixel
-
 #A classe tem a mesma funcionalidade da função Line dentro da classe Draw.
 #Line usada para fazer o avião, essa classe tem apenas essa funcionalidade, devido a projeção 3D e rotação do avião
+
+
 class Line:
     def __init__(self, x_initial, y_initial, x_final, y_final):
         self.x_initial = x_initial

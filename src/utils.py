@@ -2,7 +2,7 @@ import csv
 
 
 class Utils:
-    #Le o arquivo CSV
+    # Le o arquivo CSV
     def read_csv(self, document_path):
         file = []
         with open(document_path, 'r') as csv_file:
@@ -12,7 +12,7 @@ class Utils:
 
         return file
     
-    #faz a organização das columas dentro do arquivo
+    # Faz a organização das columas dentro do arquivo
     def transform_data_file(self, data):
         data_dict = {}
         for line in range(1, len(data)):

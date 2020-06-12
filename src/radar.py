@@ -40,7 +40,7 @@ class Radar:
 
                 self.airplane.draw_plane(self.draw, self.data_flight)
             
-            tm.sleep(2)
+            tm.sleep(1)
             self.reset()
 
         print('acabei o loop')  

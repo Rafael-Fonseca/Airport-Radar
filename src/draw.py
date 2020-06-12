@@ -1,7 +1,6 @@
 from screen import Screen
 from stack import Stack
 from graphics import *
-import math
 
 
 '''

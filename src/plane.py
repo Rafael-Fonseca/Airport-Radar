@@ -1,6 +1,5 @@
 import math
 from line import Line
-from draw import Draw
 
 '''
           PROJETO DESENVOLVIDO POR:
@@ -8,9 +7,11 @@ from draw import Draw
           FELIPE OLIVEIRA MAIA          RA: 21801679
           RAFAEL ABREU FONSECA          RA: 21700439
 '''
-#Classe usada para desenhar o avião
-class Plane():
-    #Separando os valores da classe
+# Classe usada para desenhar o avião
+
+
+class Plane:
+    # Separando os valores da classe
     def __init__(self, x, y, z):
 
         if x != 0:
