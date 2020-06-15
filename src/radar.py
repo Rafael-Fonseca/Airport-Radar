@@ -14,15 +14,25 @@ import time as tm
 '''
 #Classe do radar.
 class Radar:
-    #Separando os valores da classe
+    '''
+    Classe que chama todos os procedimentos necessários ao implante da tela
+    '''
+
     def __init__(self):
         self.base = []
         self.utils = Utils()
         self.table = "./planes/planilha de radar.csv"
         self.display = GraphWin("Radar", 500, 500)
         self.display.setBackground('black')
-    #Função para ler o arquivo csv e colocar os aviões na tela
+
     def get_plane(self):
+        '''
+        Função utiliza função para ler arquivo CSV e realiza loop que
+        utiliza os dados obtidos no CSV, para desenhar os aviões na tela.
+
+        :return: Os aviões desenhados na tela.
+        '''
+
         #TODO: MUDAR A FORMA DE OBTENÇÃO DOS AVIÕES
         self.id_flight = ['LA 2203', 'GZ 0331', 'AZ 0032', 'AZ 0157', 'GZ 0667']
 
@@ -43,12 +53,17 @@ class Radar:
             tm.sleep(1)
             self.reset()
 
-        print('acabei o loop')  
-    #Função que desenha o radar e coloca os aviões na tela
     def draw_radar(self):
+        '''
+            Além do seu retorno essa função cria a variável self.base
+            esta variável matém as informações das cores na tela após
+            o desenho do radar.
+        :return: Desenha as linhas do radar na tela.
+        '''
+
         self.draw = Draw(self.display)
 
-        
+        # Circulos concentricos
         self.draw.circle(250, 250, 62, 'green')
         self.draw.circle(250, 250, 124, 'green')
         self.draw.circle(250, 250, 186, 'green')
@@ -68,12 +83,27 @@ class Radar:
         # Linha vertical
         self.draw.line(250, 0, 250, 500, 'green', 1, 3)
 
+        # Necessário o uso do deepcopy, uma vez que as listas do python se comportam como ponteiros.
         self.base = copy.deepcopy(self.draw.screen.pixels)
 
         self.get_plane()
 
     #Função para limpar a tela
     def reset(self):
+        '''
+            Esta função realiza um loop por toda a variavel self.base.
+                self.base é uma matriz(lista de listas) na organização
+                self.base[coluna][linha] = "cor"
+
+                self.base matém valores necessários para desenhar o radar.
+
+            Neste loop, a função compara:
+            Os valores da variável que guarda a cor de cada pixel, atualmente na tela.
+            com
+            Os valores da variável self.base
+        :return:
+        '''
+
         for column_pixel in self.base:
             for pixel in column_pixel:
                 if pixel != self.draw.screen.pixels[pixel.x][pixel.y]:

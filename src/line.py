@@ -7,12 +7,23 @@ from pixel import Pixel
           RAFAEL ABREU FONSECA          RA: 21700439
 '''
 
-#A classe tem a mesma funcionalidade da função Line dentro da classe Draw.
-#Line usada para fazer o avião, essa classe tem apenas essa funcionalidade, devido a projeção 3D e rotação do avião
-
-
 class Line:
+    '''
+        A classe Line define uma reta.
+
+        Ela mantém os pontos inicial e final.
+        E mantém todos os objetos Pixel que compõe a reta no dicionário self.pixels
+    '''
+
     def __init__(self, x_initial, y_initial, x_final, y_final):
+        '''
+
+        :param x_initial: Posição no eixo X em que a reta se inicia.
+        :param y_initial: Posição no eixo y em que a reta se inicia.
+        :param x_final:   Posição no eixo X em que a reta termina.
+        :param y_final:   Posição no eixo Y em que a reta termina.
+        '''
+
         self.x_initial = x_initial
         self.y_initial = y_initial
         self.x_final = x_final
@@ -20,9 +31,18 @@ class Line:
         self.pixels = {}
 
     def __str__(self):
+        '''
+        :return: Essa função é instânciada quando o usuário executa a função print e serviu para que os
+        desenvolvedores debugassem o código com maior facilidade.
+        '''
+
         return 'Linha com ponto inicial em ({},{}) e final em ({},{})'.format(self.x_initial, self.y_initial,
                                                                               self.x_final, self.y_final)
 
+    '''
+        As funções abaixo são idênticas, exceto por uma linha, às funções que calculam à reta da classe Draw
+        por questão de escolha elas terão seus comentários realizados na classe Draw. Este código esta repetido 
+    '''
     def line_low(self, initial_x, initial_y, final_x, final_y, color):
         delta_x = final_x - initial_x
         delta_y = final_y - initial_y
